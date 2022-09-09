@@ -34,5 +34,6 @@ public class Sound {
 
 public enum Sounds {
     Sans,
+    Wrong,
     DoorClosed,
 }
