@@ -36,4 +36,5 @@ public enum Sounds {
     Sans,
     Wrong,
     DoorClosed,
+    Spear,
 }

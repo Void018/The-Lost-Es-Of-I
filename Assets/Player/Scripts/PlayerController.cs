@@ -14,7 +14,8 @@ public class PlayerController : MonoBehaviour {
 
     void Update() {
         Vector2 direction;
-        direction = joystick.Direction;
+        // direction = joystick.Direction;
+        direction = joystick?.Direction ?? Vector2.zero; // when there is no joystick in canvas
 #if UNITY_EDITOR
         if (direction == Vector2.zero)
             direction = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")); // This is for editor

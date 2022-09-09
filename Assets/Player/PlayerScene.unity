@@ -1063,54 +1063,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1 &856673046
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 856673047}
-  - component: {fileID: 856673048}
-  m_Layer: 0
-  m_Name: InteractSensor
-  m_TagString: Player
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &856673047
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 856673046}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.6, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 2134551504}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!58 &856673048
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 856673046}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.25
 --- !u!1 &1178240936
 GameObject:
   m_ObjectHideFlags: 0
@@ -1603,10 +1555,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1227299680522651040, guid: 7ce74fcc057dc54eaaf92f3ada345b01, type: 3}
-      propertyPath: sensorRadius
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 1227299680522651044, guid: 7ce74fcc057dc54eaaf92f3ada345b01, type: 3}
       propertyPath: joystick
       value: 
@@ -1659,18 +1607,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 1227299680522651066, guid: 7ce74fcc057dc54eaaf92f3ada345b01, type: 3}
-      propertyPath: m_TagString
-      value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 1227299681718732695, guid: 7ce74fcc057dc54eaaf92f3ada345b01, type: 3}
-      propertyPath: m_TagString
-      value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 7875178896633178237, guid: 7ce74fcc057dc54eaaf92f3ada345b01, type: 3}
-      propertyPath: sensor
-      value: 
-      objectReference: {fileID: 856673048}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7ce74fcc057dc54eaaf92f3ada345b01, type: 3}
 --- !u!1001 &6770750690969704869
