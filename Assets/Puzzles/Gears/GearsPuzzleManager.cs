@@ -4,18 +4,12 @@ using UnityEngine;
 
 public class GearsPuzzleManager : MonoBehaviour
 {
-    public static GearsPuzzleManager instance;
     [SerializeField]
     private GameObject puzzleInterface;
     public bool hasGear = false;
     public GameObject missingGear;
 
     public puzzleState state;
-    void Awake()
-    {
-        instance = this;
-        UpdatePuzzleState(puzzleState.started);
-    }
 
     public void UpdatePuzzleState(puzzleState newState)
     {
@@ -24,18 +18,18 @@ public class GearsPuzzleManager : MonoBehaviour
         switch (newState)
         {
             case puzzleState.started:
-                puzzleInterface.SetActive(true);
                 if (hasGear)
                     missingGear.SetActive(true);
-                UpdatePuzzleState(puzzleState.unsolved);
+                puzzleInterface.SetActive(true);
                 break;
-            case puzzleState.unsolved:
-                break;
+            case puzzleState.deactive:
             case puzzleState.solved:
+                puzzleInterface.SetActive(false);
                 break;
             default:
                 break;
         }
     }
+
 }
-public enum puzzleState { unsolved, started, solved };
+public enum puzzleState { deactive, started, solved };

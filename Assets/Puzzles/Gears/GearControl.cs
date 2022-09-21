@@ -24,7 +24,7 @@ public class GearControl : MonoBehaviour
 
         if(gameObject.tag == "Final Gear" && rotationSpeed != 0)
         {
-            manager.UpdatePuzzleState(puzzleState.solved);
+            StartCoroutine(Wait(2.5f));
         }
     }
 
@@ -68,5 +68,12 @@ public class GearControl : MonoBehaviour
     {
         if (gameObject.tag != "Leader Gear")
             rotationSpeed = 0f;
+    }
+
+    IEnumerator Wait(float n)
+    {
+        yield return new WaitForSeconds(5f);
+
+        manager.UpdatePuzzleState(puzzleState.solved);
     }
 }
