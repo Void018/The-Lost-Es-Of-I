@@ -26,5 +26,11 @@ public class PlayerInteraction : MonoBehaviour {
         if (other.TryGetComponent<Interactable>(out Interactable interactable)) {
             // interactable.Interact();
         }
+        switch (other.tag) {
+            case "Projectile":
+                Destroy(other.gameObject);
+                transform.position = Vector2.right * -8; // TODO: change respawn point to global Transform
+                break;
+        }
     }
 }

@@ -10,7 +10,7 @@ public class PlayerAnimation : MonoBehaviour {
     void Start() {
         animator = GetComponent<Animator>();
         sensor = transform.Find("InteractSensor");
-        sensorRadius = sensor.transform.position.magnitude;
+        sensorRadius = sensor.transform.localPosition.magnitude;
     }
 
     public void Animate(Vector2 dir) {
