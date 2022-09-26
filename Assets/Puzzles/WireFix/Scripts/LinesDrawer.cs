@@ -50,10 +50,8 @@ public class LinesDrawer : MonoBehaviour {
 		//Check if mousePos hits any collider with layer "CantDrawOver", if true cut the line by calling EndDraw( )
 		RaycastHit2D hit = Physics2D.CircleCast ( mousePosition, lineWidth / 3f, Vector2.zero, 1f, cantDrawOverLayer );
 
-		if (hit) {
-			Destroy (currentLine.gameObject);
-			SoundManager.instance.Play (Sounds.Wrong);
-		}
+		if ( hit )
+			Destroy ( currentLine.gameObject );
 		else
 			currentLine.AddPoint ( mousePosition );
 	}
