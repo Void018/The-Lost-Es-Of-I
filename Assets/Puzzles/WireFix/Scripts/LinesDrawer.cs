@@ -2,74 +2,86 @@
 
 public class LinesDrawer : MonoBehaviour {
 
-	public GameObject linePrefab;
-	public LayerMask cantDrawOverLayer;
-	int cantDrawOverLayerIndex;
+    public GameObject linePrefab;
+    public LayerMask cantDrawOverLayer;
+    int cantDrawOverLayerIndex;
 
-	[Space ( 30f )]
-	public Gradient lineColor;
-	public float linePointsMinDistance;
-	public float lineWidth;
+    [Space(30f)]
+    public Gradient lineColor;
+    public float linePointsMinDistance;
+    public float lineWidth;
 
-	Line currentLine;
+    Line currentLine;
 
-	Camera cam;
+    Camera cam;
 
 
-	void Start ( ) {
-		cam = Camera.main;
-		cantDrawOverLayerIndex = LayerMask.NameToLayer ( "CantDrawOver" );
-	}
+    void Start() {
+        cam = Camera.main;
+        cantDrawOverLayerIndex = LayerMask.NameToLayer("CantDrawOver");
 
-	void Update ( ) {
-		if ( Input.GetMouseButtonDown ( 0 ) )
-			BeginDraw ( );
+        print($"linePrefab: {linePrefab}");
+        print($"cantDrawOverLayer: {cantDrawOverLayer}");
+        print($"cantDrawOverLayerIndex: {cantDrawOverLayerIndex}");
+        print($"lineColor: {lineColor}");
+        print($"linePointsMinDistance: {linePointsMinDistance}");
+        print($"lineWidth: {lineWidth}");
+    }
 
-		if ( currentLine != null )
-			Draw ( );
+    void Update() {
+        if (Input.GetMouseButtonDown(0))
+            BeginDraw();
 
-		if ( Input.GetMouseButtonUp ( 0 ) )
-			EndDraw ( );
-	}
+        if (currentLine != null)
+            Draw();
 
-	// Begin Draw ----------------------------------------------
-	void BeginDraw ( ) {
-		currentLine = Instantiate ( linePrefab, this.transform ).GetComponent <Line> ( );
+        if (Input.GetMouseButtonUp(0))
+            EndDraw();
+    }
 
-		//Set line properties
-		currentLine.UsePhysics ( false );
-		currentLine.SetLineColor ( lineColor );
-		currentLine.SetPointsMinDistance ( linePointsMinDistance );
-		currentLine.SetLineWidth ( lineWidth );
+    // Begin Draw ----------------------------------------------
+    void BeginDraw() {
+        currentLine = Instantiate(linePrefab, this.transform).GetComponent<Line>();
 
-	}
-	// Draw ----------------------------------------------------
-	void Draw ( ) {
-		Vector2 mousePosition = cam.ScreenToWorldPoint ( Input.mousePosition );
+        //Set line properties
+        currentLine.UsePhysics(false);
+        currentLine.SetLineColor(lineColor);
+        currentLine.SetPointsMinDistance(linePointsMinDistance);
+        currentLine.SetLineWidth(lineWidth);
 
-		//Check if mousePos hits any collider with layer "CantDrawOver", if true cut the line by calling EndDraw( )
-		RaycastHit2D hit = Physics2D.CircleCast ( mousePosition, lineWidth / 3f, Vector2.zero, 1f, cantDrawOverLayer );
+    }
+    // Draw ----------------------------------------------------
+    void Draw() {
+        Vector2 mousePosition = cam.ScreenToWorldPoint(Input.mousePosition);
 
-		if ( hit )
-			Destroy ( currentLine.gameObject );
-		else
-			currentLine.AddPoint ( mousePosition );
-	}
-	// End Draw ------------------------------------------------
-	void EndDraw ( ) {
-		if ( currentLine != null ) {
-			if ( currentLine.pointsCount < 2 ) {
-				//If line has one point
-				Destroy ( currentLine.gameObject );
-			} else {
-				//Add the line to "CantDrawOver" layer
-				currentLine.gameObject.layer = cantDrawOverLayerIndex;
+        //Check if mousePos hits any collider with layer "CantDrawOver", if true cut the line by calling EndDraw( )
+        RaycastHit2D hit = Physics2D.CircleCast(mousePosition, lineWidth / 3f, Vector2.zero, 1f, cantDrawOverLayer);
 
-				//Activate Physics on the line
-				currentLine.UsePhysics (false);
+        if (hit) {
+            Destroy(currentLine.gameObject);
+            print("Here 1");
+        } else {
+            currentLine.AddPoint(mousePosition);
+            print("Here 2");
+        }
+    }
+    // End Draw ------------------------------------------------
+    void EndDraw() {
+        if (currentLine != null) {
+            if (currentLine.pointsCount < 2) {
+                print("Here 3");
+                //If line has one point
+                Destroy(currentLine.gameObject);
+            } else {
+                print("Here 4");
+                //Add the line to "CantDrawOver" layer
+                currentLine.gameObject.layer = cantDrawOverLayerIndex;
 
-				currentLine = null;
-			}
-		}
-	}
+                //Activate Physics on the line
+                currentLine.UsePhysics(false);
+
+                currentLine = null;
+            }
+        }
+    }
 }
