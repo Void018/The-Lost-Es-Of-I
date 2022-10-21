@@ -1,76 +1,59 @@
 using System.Collections;
 using UnityEngine;
 
-public class GearControl : MonoBehaviour
-{
+public class GearControl : MonoBehaviour {
     public float rotationSpeed = 5f;
     public bool CCW = true;
     public float radius = 1f;
 
     GearsPuzzleManager manager;
 
-    private void Start()
-    {
+    private void Start() {
         manager = FindObjectOfType<GearsPuzzleManager>();
     }
 
-    void Update()
-    {
+    void Update() {
         if (CCW)
             transform.Rotate(Vector3.back * rotationSpeed * Time.deltaTime);
         else
             transform.Rotate(Vector3.forward * rotationSpeed * Time.deltaTime);
 
-        if(gameObject.tag == "Final Gear" && rotationSpeed != 0)
-        {
+        if (gameObject.tag == "Final Gear" && rotationSpeed != 0) {
             StartCoroutine(Wait(2.5f));
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
+    private void OnTriggerEnter2D(Collider2D collision) {
         GearControl gear = collision.GetComponent<GearControl>();
-        if (collision.gameObject.tag == "Leader Gear")
-        {
+        if (collision.gameObject.tag == "Leader Gear") {
             RotateGear(gear);
-        }
-        else if (collision.gameObject.tag == "Gear" && gear.rotationSpeed > rotationSpeed)
-        {
+        } else if (collision.gameObject.tag == "Gear" && gear.rotationSpeed > rotationSpeed) {
             RotateGear(gear);
         }
     }
 
-    private void RotateGear(GearControl gear)
-    {
+    private void RotateGear(GearControl gear) {
         CCW = !gear.CCW;
-        rotationSpeed = gear.rotationSpeed / (radius/gear.radius);
+        rotationSpeed = gear.rotationSpeed / (radius / gear.radius);
     }
 
-    private void OnTriggerStay2D(Collider2D collision)
-    {
+    private void OnTriggerStay2D(Collider2D collision) {
         GearControl gear = collision.GetComponent<GearControl>();
-        if (gameObject.tag != "Leader Gear" && gear.rotationSpeed == 0f && rotationSpeed == 0f)
-        {
+        if (gameObject.tag != "Leader Gear" && gear.rotationSpeed == 0f && rotationSpeed == 0f) {
             rotationSpeed = 0f;
-        }
-        else if (collision.gameObject.tag == "Gear" && gear.rotationSpeed > rotationSpeed)
-        {
+        } else if (collision.gameObject.tag == "Gear" && gear.rotationSpeed > rotationSpeed) {
             RotateGear(gear);
-        }
-        else if (collision.gameObject.tag == "Leader Gear")
-        {
+        } else if (collision.gameObject.tag == "Leader Gear") {
             RotateGear(gear);
         }
     }
 
-    private void OnTriggerExit2D(Collider2D collision)
-    {
+    private void OnTriggerExit2D(Collider2D collision) {
         if (gameObject.tag != "Leader Gear")
             rotationSpeed = 0f;
     }
 
-    IEnumerator Wait(float n)
-    {
+    IEnumerator Wait(float n) {
         yield return new WaitForSeconds(5f);
 
         manager.UpdatePuzzleState(puzzleState.solved);
