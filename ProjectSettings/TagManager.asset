@@ -8,6 +8,7 @@ TagManager:
   - Gear
   - Leader Gear
   - Final Gear
+  - Grey
   layers:
   - Default
   - TransparentFX
@@ -19,7 +20,7 @@ TagManager:
   - 
   - CantDrawOver
   - Station
-  - 
+  - Tiles
   - 
   - 
   - 

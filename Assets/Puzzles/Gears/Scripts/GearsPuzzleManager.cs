@@ -25,6 +25,5 @@ public class GearsPuzzleManager : MonoBehaviour {
                 break;
         }
     }
-
 }
 public enum puzzleState { deactive, started, solved };

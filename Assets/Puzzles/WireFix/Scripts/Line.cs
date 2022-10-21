@@ -39,11 +39,16 @@ public class Line : MonoBehaviour {
 			edgeCollider.points = points.ToArray ( );
 	}
 
-	public Vector2 GetLastPoint ( ) {
-		return ( Vector2 )lineRenderer.GetPosition ( pointsCount - 1 );
+	public Vector2 GetFirstPoint (){
+		return (Vector2)lineRenderer.GetPosition(0);
 	}
 
-	public void UsePhysics ( bool usePhysics ) {
+    public Vector2 GetLastPoint()
+    {
+        return (Vector2)lineRenderer.GetPosition(pointsCount - 1);
+    }
+
+    public void UsePhysics ( bool usePhysics ) {
 		// isKinematic = true  means that this rigidbody is not affected by Unity's physics engine
 		rigidBody.isKinematic = !usePhysics;
 	}
