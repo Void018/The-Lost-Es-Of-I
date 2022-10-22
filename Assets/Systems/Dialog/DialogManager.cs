@@ -6,9 +6,8 @@ public class DialogManager : MonoBehaviour {
     public static DialogManager instance;
 
     public GameObject dialogPanel;
-    public TMP_Text textComponent;
-    [Multiline]
-    public float textSpeed;
+    private TMP_Text textComponent;
+    public float textSpeed = 0.05f;
     [HideInInspector] public bool onDialog;
 
     private int index;
@@ -19,7 +18,7 @@ public class DialogManager : MonoBehaviour {
     }
 
     void Start() {
-
+        textComponent = dialogPanel.GetComponentInChildren<TMP_Text>();
     }
 
     void Update() {

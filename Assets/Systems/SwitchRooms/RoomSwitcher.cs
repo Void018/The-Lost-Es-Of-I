@@ -6,36 +6,24 @@ using UnityEngine;
 public class RoomSwitcher : MonoBehaviour {
     public Transform targetRoom;
 
-    private CinemachineVirtualCamera targetCamera;
-    private CinemachineVirtualCamera cam;
     private Transform player;
     private Transform targetPosition;
-    private List<CinemachineVirtualCamera> allCams;
+    private CinemachineVirtualCamera virtualCamera;
+    private CinemachineConfiner2D confiner;
+    private PolygonCollider2D polygonCollider;
 
     void Start() {
-        cam = transform.parent.GetComponentInChildren<CinemachineVirtualCamera>();
         player = FindObjectOfType<PlayerController>().transform;
+        virtualCamera = FindObjectOfType<CinemachineVirtualCamera>();
+        confiner = virtualCamera.GetComponent<CinemachineConfiner2D>();
+        polygonCollider = targetRoom.GetComponentInChildren<PolygonCollider2D>();
         targetPosition = transform.GetChild(0);
-        allCams = FindObjectsOfType<CinemachineVirtualCamera>().ToList();
-        targetCamera = targetRoom.GetComponentInChildren<CinemachineVirtualCamera>();
-    }
-
-    void Update() {
-
     }
 
     private void OnTriggerEnter2D(Collider2D other) {
         if (!other.CompareTag("Player")) return;
 
         player.transform.position = targetPosition.position;
-        if (cam == targetCamera) return;
-
-        print($"current: {cam.transform.parent.name}, target: {targetCamera.transform.parent.name}");
-        allCams.ForEach(c => c.enabled = false);
-        targetCamera.enabled = true;
-    }
-
-    private void OnTriggerExit2D(Collider2D other) {
-        cam.enabled = false;
+        confiner.m_BoundingShape2D = polygonCollider;
     }
 }
