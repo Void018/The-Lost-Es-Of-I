@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerInteraction : MonoBehaviour {
     public Collider2D sensor;
+    public Transform spearRespawnPoint;
     ContactFilter2D filter = new ContactFilter2D().NoFilter();
 
     void Update() {
@@ -29,7 +30,7 @@ public class PlayerInteraction : MonoBehaviour {
         switch (other.tag) {
             case "Projectile":
                 Destroy(other.gameObject);
-                transform.position = Vector2.right * -8; // TODO: change respawn point to global Transform
+                transform.position = spearRespawnPoint.position;
                 break;
         }
     }

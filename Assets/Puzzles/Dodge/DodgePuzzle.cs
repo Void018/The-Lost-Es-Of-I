@@ -6,6 +6,8 @@ public class DodgePuzzle : MonoBehaviour {
     public GameObject sprite;
     public float minSpeed;
     public float maxSpeed;
+    [Range(0f, 0.5f)]
+    public float spawnCooldown;
     [Range(0f, 10f)]
     public float lifetime;
 
@@ -15,22 +17,24 @@ public class DodgePuzzle : MonoBehaviour {
     void Start() {
         box = GetComponentInChildren<BoxCollider2D>();
         player = FindObjectOfType<PlayerController>().transform;
+        StartCoroutine(StartSpawn());
     }
 
-    void Update() {
-        if (Input.GetKey(KeyCode.Space))
+    IEnumerator StartSpawn() {
+        while (true) {
+            yield return new WaitForSeconds(spawnCooldown);
             InstantiateProjectile();
+        }
     }
 
     private void InstantiateProjectile() {
         var projectile = Instantiate(sprite, GetSpawnPoint(), Quaternion.identity, transform).GetComponent<Rigidbody2D>();
         //
         SoundManager.instance.Play(Sounds.Spear);
-        projectile.rotation = Vector2.Angle(projectile.position, GetSpawnPoint());
         var sp = projectile.GetComponentInChildren<SpriteRenderer>();
         var origColor = sp.color;
         LeanTween.value(projectile.gameObject, 0.4f, 1, 0.2f).setOnUpdate((float a) => sp.color = origColor * a);
-        projectile.transform.LeanRotateZ(projectile.rotation, 0.2f)
+        projectile.transform.LeanRotateZ(projectile.rotation + Random.Range(0, 180), 0.2f)
             .setOnUpdate(r => projectile.rotation = r)
             .setOnComplete(
                 () => {
