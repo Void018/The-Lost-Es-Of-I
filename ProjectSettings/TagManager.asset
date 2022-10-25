@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - Projectile
+  - world
+  - empty
+  - image
   layers:
   - Default
   - TransparentFX
