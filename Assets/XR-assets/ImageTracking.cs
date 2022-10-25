@@ -83,7 +83,7 @@ public class ImageTracking : MonoBehaviour
         prefab.transform.localScale = prefab.transform.localScale * shrinkValue;
         while (prefab.transform.localScale.z < originalValue)
         {
-            prefab.transform.localScale += prefab.transform.localScale * shrinkValue * 0.1f;
+            prefab.transform.localScale += prefab.transform.localScale * shrinkValue * 0.4f;
             yield return new WaitForEndOfFrame();
         }
 
