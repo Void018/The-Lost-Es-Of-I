@@ -25,5 +25,10 @@ public class GearsPuzzleManager : MonoBehaviour {
                 break;
         }
     }
+
+    public void DisableUI()
+    {
+        UpdatePuzzleState(puzzleState.deactive);
+    }
 }
 public enum puzzleState { deactive, started, solved };

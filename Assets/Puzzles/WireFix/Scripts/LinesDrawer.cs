@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections;
 using System.Collections.Generic;
 
 
@@ -13,6 +14,8 @@ public class LinesDrawer : MonoBehaviour {
 
     // How many tiles are connected
     int solvedTiles = 0;
+
+    public GameObject successUI;
 
     [Space(30f)]
     public Gradient lineColor;
@@ -91,12 +94,11 @@ public class LinesDrawer : MonoBehaviour {
 
                 if(CheckConnection(currentLine.GetFirstPoint(), currentLine.GetLastPoint()))
                 {
-                    Debug.Log("Aaaaaand a hit!");
                     solvedTiles += 1;
                     if (solvedTiles >= manager.numberOfTiles)
                     {
-                        //manager.UpdatePuzzleState(puzzleState.solved);
-                        Debug.Log("Aaaaaand a win!");
+                        successUI.SetActive(true);
+                        StartCoroutine(Wait(2f));
                     }
                 }
                 else
@@ -128,5 +130,21 @@ public class LinesDrawer : MonoBehaviour {
             }
         }
         return false;
+    }
+
+    IEnumerator Wait(float t)
+    {
+        yield return new WaitForSeconds(t);
+        manager.UpdatePuzzleState(puzzleState.solved);
+    }
+
+    public void RestartPuzzle()
+    {
+        foreach (Transform child in transform)
+        {
+            Destroy(child.gameObject);
+        }
+        connectedTags.Clear();
+        solvedTiles = 0;
     }
 }
