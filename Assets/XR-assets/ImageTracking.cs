@@ -11,6 +11,8 @@ public class ImageTracking : MonoBehaviour
 
     Dictionary<string, GameObject> spawnedPrefabs = new Dictionary<string, GameObject>();
     ARTrackedImageManager trackedImageManager;
+    [SerializeField] GameObject archerySystem;
+
 
     private void Awake()
     {
@@ -59,6 +61,10 @@ public class ImageTracking : MonoBehaviour
             if (go.name != name)
             {
                 go.SetActive(false);
+                if (go.name == "target")
+                {
+                    archerySystem.SetActive(false);
+                }
             }
 
         }
@@ -76,6 +82,10 @@ public class ImageTracking : MonoBehaviour
         GameObject prefab = spawnedPrefabs[name];
         prefab.transform.position = position;
         prefab.SetActive(true);
+        if (prefab.name == "target")
+        {
+            archerySystem.SetActive(true);
+        }
 
         // animation
         float originalValue = prefab.transform.localScale.z;

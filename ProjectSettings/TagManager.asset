@@ -8,6 +8,14 @@ TagManager:
   - world
   - empty
   - image
+  - target1
+  - archer
+  - E1
+  - text1
+  - text2
+  - text3
+  - E2
+  - E3
   layers:
   - Default
   - TransparentFX

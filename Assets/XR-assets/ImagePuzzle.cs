@@ -14,6 +14,7 @@ public class ImagePuzzle : MonoBehaviour
     Vector3 emptyPosition = new Vector3(0, 0, 0);
     float animationSpeed = 0.5f;
     bool isMoving;
+    [SerializeField] GameObject logo;
 
 
     // public Text debug;
@@ -173,5 +174,17 @@ public class ImagePuzzle : MonoBehaviour
         }
         emptyPosition = newPosition;
         isMoving = false;
+        if (transform.GetChild(0).localPosition == new Vector3(0, 0, 0) &&
+            transform.GetChild(1).localPosition == new Vector3(-1, 0, 0) &&
+            transform.GetChild(2).localPosition == new Vector3(1, 0, 0) &&
+            transform.GetChild(3).localPosition == new Vector3(0, 1, 0) &&
+            transform.GetChild(4).localPosition == new Vector3(-1, 1, 0) &&
+            transform.GetChild(5).localPosition == new Vector3(1, 1, 0) &&
+            transform.GetChild(6).localPosition == new Vector3(0, -1, 0) &&
+            transform.GetChild(7).localPosition == new Vector3(-1, -1, 0) &&
+            transform.GetChild(8).localPosition == new Vector3(1, -1, 0))
+        {
+            logo.gameObject.SetActive(true);
+        }
     }
 }

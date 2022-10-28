@@ -27,6 +27,10 @@ public class WorldPuzzle : MonoBehaviour
                 {
                     transform.Rotate(0, 0, Input.GetTouch(0).deltaPosition.x * -rotationSpeed);
                 }
+                if (hit.collider.tag == "region")
+                {
+                    GetComponent<Animator>().Play("win");
+                }
             }
         }
     }
