@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 // This manages each of the two versions indivisually and must have 2 different instances
@@ -11,6 +12,9 @@ public class WirefixPuzzleManager : MonoBehaviour
 
     // Put line drawer and all the elements of the puzzle in one (deactive by default) Object
     public GameObject puzzleInterface;
+
+    public TextMeshProUGUI progressText;
+
 
     public GameObject player;
     public GameObject controls;
@@ -33,8 +37,14 @@ public class WirefixPuzzleManager : MonoBehaviour
                 linesDrawer.gameObject.SetActive(true);
                 puzzleInterface.SetActive(true);
                 break;
-            case puzzleState.deactive:
             case puzzleState.solved:
+                progressText.text += "E";
+                player.SetActive(true);
+                controls.SetActive(true);
+                puzzleInterface.SetActive(false);
+                linesDrawer.gameObject.SetActive(false);
+                break;
+            case puzzleState.deactive:
                 player.SetActive(true);
                 controls.SetActive(true);
                 puzzleInterface.SetActive(false);

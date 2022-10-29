@@ -1,10 +1,13 @@
 using UnityEngine;
+using TMPro;
 
 public class GearsPuzzleManager : MonoBehaviour {
     [SerializeField]
     private GameObject puzzleInterface;
     public bool hasGear = false;
     public GameObject missingGear;
+
+    public TextMeshProUGUI progressText;
 
     public puzzleState state;
 
@@ -17,8 +20,11 @@ public class GearsPuzzleManager : MonoBehaviour {
                     missingGear.SetActive(true);
                 puzzleInterface.SetActive(true);
                 break;
-            case puzzleState.deactive:
             case puzzleState.solved:
+                puzzleInterface.SetActive(false);
+                progressText.text += "E";
+                break;
+            case puzzleState.deactive:
                 puzzleInterface.SetActive(false);
                 break;
             default:
